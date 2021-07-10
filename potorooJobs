@@ -1,0 +1,9 @@
+#
+# author        Oliver Blaser
+# date          10.07.2021
+# copyright     GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+#
+# This is a potoroo job file. See https://github.com/oblaser/potoroo for details.
+#
+
+-if ./src/index.json            -od ./deploy        --copy

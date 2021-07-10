@@ -1,0 +1,35 @@
+{
+    "config":
+    {
+        "maxWidth": "680px",
+        "center": true
+    },
+
+    "defaultStyle":
+    [
+        { "type": "text", "css": "margin:7px 0px;" },
+        { "type": "title2", "css": "margin-top:15px;" },
+        { "type": "listItem", "css": "margin-bottom:3px;" }
+    ],
+
+    "content":
+    [
+        { "type": "title1", "text": "Online Apps" },
+        { "type": "text", "text": "The source code of this page and some subpages can be found <a href=\"https://github.com/oblaser/oa.oblaser.ch\" target=\"_blank\">here</a>." },
+
+        { "type": "title2", "text": "Games" },
+        {
+            "type": "list",
+            "items":
+            [
+                { "type": "link", "url": "./darwins-dice/", "text": "Darwin's Dice" }
+            ]
+        }
+    ],
+
+    "footer":
+    [
+        { "type": "text", "text": "&copy; Oliver Blaser", "htmlStyle": "display:inline-block; margin-right:7px;" },
+        { "type": "link", "url": "https://oblaser.ch/", "text": "Homepage" }
+    ]
+}

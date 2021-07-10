@@ -1,0 +1,125 @@
+/*
+
+author         Oliver Blaser
+date           08.04.2021
+copyright      GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+
+*/
+
+:root
+{
+    --color1: #d3d3d3;
+    --color2: #b3b3b3;
+    --color3: #5c5c5c;
+    --colorText: #424242;
+    --colorHighlight: #4b84ff;
+
+    --fontFamily: Helvetica, sans-serif;
+
+    --errorFg: #ffd900;
+    --errorBg: #424242;
+}
+
+html,
+body
+{
+    background-color: var(--color2);
+    color: var(--colorText);
+    font-family: var(--fontFamily);
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+
+body { margin: 8px; }
+
+h1
+{
+    font-size: 22px;
+    margin: 1px 0px;
+}
+
+h2
+{
+    font-size: 19px;
+    margin: 1px 0px;
+}
+
+h3
+{
+    font-size: 16px;
+    margin: 1px 0px;
+}
+
+a
+{
+    color: var(--colorHighlight);
+}
+
+#mainContainer
+{
+    margin: 0px;
+    padding: 0px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contentContainer
+{
+    margin: 0px;
+    padding: 5px 8px 6px 8px;
+    border-radius: 5px;
+    background-color: var(--color1);
+}
+/*#p rm */
+.cdo_title1
+{
+}
+
+.cdo_title2
+{
+}
+
+.cdo_title3
+{
+}
+
+.cdo_text
+{
+}
+
+.cdo_link
+{
+}
+
+.cdo_spacer
+{
+}
+/*#p endrm */
+
+.cdo_list
+{
+    margin: 0px 0px 7px 0px;
+    padding-left: 25px;
+}
+/*#p rm */
+.cdo_listItem
+{
+}
+/*#p endrm */
+
+#footer
+{
+    padding: 3px 5px 0px 5px;
+    color: var(--color3);
+    font-size: 12px;
+}
+
+#footerContent
+{
+    display: inline-block;
+}
+
+#footer a { color: var(--color3); }
+#footer a:hover { color: var(--colorHighlight); }
