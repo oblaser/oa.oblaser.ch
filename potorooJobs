@@ -1,10 +1,20 @@
 #
 # author        Oliver Blaser
-# date          10.07.2021
-# copyright     GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+# date          09.01.2022
+# copyright     GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
 #
 
 # This is a potoroo job file. See https://github.com/oblaser/potoroo for details.
+# (potoroo is still in alfa, use at minimum the 0.2.0-pre-release https://github.com/oblaser/potoroo/releases/tag/0.2.0-pre-release)
 
 
--if ./src/index.json            -od ./deploy        --copy
+-if ./src/index.js                      -od ./deploy
+
+-if ./src/00_assets/ee.js               -od ./deploy/00_assets
+-if ./src/00_assets/ojs.js              -od ./deploy/00_assets
+-if ./src/00_assets/style.css           -od ./deploy/00_assets          -t custom:/*#p      -Wsup 107
+
+-if ./src/calculators/resistor-networks/index.html          -od ./deploy/calculators/resistor-networks      -t custom:<!--#p        -Wsup 107
+-if ./src/calculators/resistor-networks/index.js            -od ./deploy/calculators/resistor-networks
+-if ./src/calculators/resistor-networks/ninv-opamp.js       -od ./deploy/calculators/resistor-networks
+-if ./src/calculators/resistor-networks/volt-div.js         -od ./deploy/calculators/resistor-networks

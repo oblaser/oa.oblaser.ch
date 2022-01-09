@@ -1,7 +1,7 @@
 /*
 author          Oliver Blaser
-date            08.04.2021
-copyright       GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+date            09.01.2022
+copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
 */
 
 :root
@@ -12,7 +12,7 @@ copyright       GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
     --colorText: #424242;
     --colorHighlight: #4b84ff;
 
-    --fontFamily: Helvetica, sans-serif;
+    --fontFamily: 'Trebuchet MS', Verdana, Helvetica, sans-serif;
 
     --errorFg: #ffd900;
     --errorBg: #424242;
@@ -34,19 +34,19 @@ body { margin: 8px; }
 h1
 {
     font-size: 22px;
-    margin: 1px 0px;
+    margin: 5px 0px;
 }
 
 h2
 {
     font-size: 19px;
-    margin: 1px 0px;
+    margin: 5px 0px;
 }
 
 h3
 {
     font-size: 16px;
-    margin: 1px 0px;
+    margin: 3px 0px;
 }
 
 a
@@ -58,7 +58,7 @@ a
 {
     margin: 0px;
     padding: 0px;
-    max-width: 1000px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
 }

@@ -4,13 +4,15 @@ date            09.01.2022
 copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
 */
 
-function amp(ra, rb) { return 1 + (ra / rb); }
+function amp(ra, rb) { return (ra+rb)/rb; } // ratio = V1/V2 = (Ra+Rb)/Rb
 
 function calc(a, eSeries = 'E24')
 {
     let eValues = ee_getEValues(eSeries, true);
 
     if((typeof a !== 'number') || isNaN(a) || (eValues == null)) return { str: 'invalid parameter' };
+
+    if(a <= 1) return { str: 'invalid ratio' };
 
     let exponents = [0];
     for(let i = 0; i <= 12; ++i) exponents[i] = i;
@@ -57,37 +59,5 @@ function calc(a, eSeries = 'E24')
     let errA = r - a;
     let errR = errA / a;
 
-    let ra_json;
-    if(ra === Infinity) ra_json = 'infinity';
-    else if(ra === -Infinity) ra_json = '-infinity';
-    else ra_json = ra;
-    let rb_json;
-    if(rb === Infinity) rb_json = 'infinity';
-    else if(rb === -Infinity) rb_json = '-infinity';
-    else rb_json = rb;
-
-    return {
-        str: 'A = 1 + ( ' + ojs_expFormatEng(ra) + ' / ' + ojs_expFormatEng(rb) + ' ) = ' + ojs_roundSignificant(r) + ' (Error: ' + ojs_expFormatEng(errA) + ' / ' + ojs_roundSignificant(errR*100, 2) + '%)',
-        ra: ra_json,
-        rb: rb_json,
-        a: r,
-        aTarget: a,
-        err_abs: errA,
-        err_rel: errR
-    };
+    return { str: 'V<sub>2</sub> = ( ' + ojs_expFormatEng(rb) + ' * V<sub>1</sub> ) / ( ' + ojs_expFormatEng(ra) + ' + ' + ojs_expFormatEng(rb) + ' ) = ' + ojs_roundSignificant(r) + ' (Error: ' + ojs_expFormatEng(errA) + ' / ' + ojs_roundSignificant(errR*100, 2) + '%)', ra: ra, rb: rb, a: r, err_abs: errA, err_rel: errR };
 }
-
-//#p rm
-console.log(calc());
-console.log(calc(null));
-console.log(calc(NaN));
-console.log(calc('asdf'));
-console.log(calc(1));
-console.log(calc(1.0001));
-console.log(calc(1.586));
-console.log(calc(34));
-console.log(calc(34567));
-
-console.log(calc(1.586, 'e6'));
-console.log(calc(34, 'E3'));
-//#p endrm

@@ -1,6 +1,6 @@
 /*
 author          Oliver Blaser
-date            05.01.2022
+date            09.01.2022
 copyright       MIT - Copyright (c) 2022 Oliver Blaser
 */
 
@@ -54,14 +54,17 @@ function ojs_roundSignificant(value, nDigits = 4)
     return r;
 }
 
-function ojs_expFormatEng(value, nSigDig = 4)
+function ojs_expFormatEng(value, nSigDig = 4, infinStr = 'infinity')
 {
     let r = '';
 
     if(value != 0)
     {
-        if(value === Infinity) r = 'Infinity';
-        else if(value === -Infinity) r = '-Infinity';
+        let infinityString = 'infinity';
+        if(typeof infinStr === 'string') infinityString = infinStr;
+
+        if(value === Infinity) r = infinityString;
+        else if(value === -Infinity) r = '-' + infinityString;
         else
         {
             let signfactor = (value > 0 ? 1 : -1);

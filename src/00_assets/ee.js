@@ -1,8 +1,10 @@
 /*
 author          Oliver Blaser
-date            26.06.2021
-copyright       GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+date            09.01.2022
+copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
 */
+
+const ee_eSeries = [ 'E3', 'E6', 'E12', 'E24' ];
 
 const ee_E3 = [ 1, 2.2, 4.7 ];
 const ee_E6 = [ 1, 1.5, 2.2, 3.3, 4.7, 6.8 ];

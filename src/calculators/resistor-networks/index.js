@@ -1,76 +1,69 @@
 /*
 author          Oliver Blaser
-date            26.06.2021
-copyright       GNU GPLv3 - Copyright (c) 2021 Oliver Blaser
+date            09.01.2022
+copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
 */
 
-function amp(ra, rb) { return (ra+rb)/rb; } // ratio = V1/V2 = (Ra+Rb)/Rb
-
-function calc(a, eSeries = 'E24')
+function updateVoltDiv()
 {
-    let eValues = ee_getEValues(eSeries, true);
+    let es = $('#eSeries').val()
+    $('#voltdiv_r').html('<div style="font-family: \'Courier New\';">' + JSON.stringify(calc($('#voltdiv_v1').val() / $('#voltdiv_v2').val(), es), null, 2).replaceAll('\n', '<br/>').replaceAll(' ', '&nbsp;') + '</div>');
+}
 
-    if((typeof a !== 'number') || isNaN(a) || (eValues == null)) return "invalid parameter";
-
-    if(a<=1) return { str: 'invalid ratio' };
-
-    let exponents = [0];
-    for(let i = 0; i <= 12; ++i) exponents[i] = i;
-    for(let i = -12; i < 0; ++i) exponents[exponents.length] = i;
-
-    let exp = exponents[0];
-    let ira = 0;
-    let irb = 0;
-
-    for(let iExp = 0; iExp < exponents.length; ++iExp)
+function updateNinvOpamp()
+{
+    let es = $('#eSeries').val()
+    $('#ninvopamp_r').html('<div style="font-family: \'Courier New\';">' + JSON.stringify(calc($('#ninvopamp_vout').val() / $('#ninvopamp_vin').val(), es), null, 2).replaceAll('\n', '<br/>').replaceAll(' ', '&nbsp;') + '</div>');
+}
+var updateNinvOpamp_input_lastWasVin = true;
+function updateNinvOpamp_input(vIn, vOut)
+{
+    if(vIn && !vOut)
     {
-        for(let i = 0; i < eValues.length; ++i)
+        updateNinvOpamp_input_lastWasVin = true;
+        $('#ninvopamp_a').val($('#ninvopamp_vout').val() / $('#ninvopamp_vin').val());
+    }
+    else if(!vIn && vOut)
+    {
+        updateNinvOpamp_input_lastWasVin = false;
+        $('#ninvopamp_a').val($('#ninvopamp_vout').val() / $('#ninvopamp_vin').val());
+    }
+    else if(!vIn && !vOut)
+    {
+        if(updateNinvOpamp_input_lastWasVin)
         {
-            for(let j = 0; j < eValues.length; ++j)
-            {
-                let err = amp(eValues[ira] * Math.pow(10, exp), eValues[irb]) - a;
-                let err_loop = amp(eValues[i] * Math.pow(10, exponents[iExp]), eValues[j]) - a;
-
-                if(Math.abs(err_loop) < Math.abs(err))
-                {
-                    exp = exponents[iExp];
-                    ira = i;
-                    irb = j;
-                }
-            }
+            $('#ninvopamp_vout').val($('#ninvopamp_vin').val() * $('#ninvopamp_a').val());
+        }
+        else
+        {
+            $('#ninvopamp_vin').val($('#ninvopamp_vout').val() / $('#ninvopamp_a').val());
         }
     }
+    else alert('updateNinvOpamp_input(' + vIn + ', ' + vOut + ')');
 
-    let ra = 0;
-    let rb = 0;
-    
-    if(exp >= 0)
-    {
-        ra = eValues[ira] * Math.pow(10, exp);
-        rb = eValues[irb];
-    }
-    else
-    {
-        ra = eValues[ira];
-        rb = eValues[irb] * Math.pow(10, -exp);
-    }
-    
-    let r = amp(ra, rb);
-    let errA = r - a;
-    let errR = errA / a;
-
-    return { str: 'V<sub>2</sub> = ( ' + ojs_expFormatEng(rb) + ' * V<sub>1</sub> ) / ( ' + ojs_expFormatEng(ra) + ' + ' + ojs_expFormatEng(rb) + ' ) = ' + ojs_roundSignificant(r) + ' (Error: ' + ojs_expFormatEng(errA) + ' / ' + ojs_roundSignificant(errR*100, 2) + '%)', ra: ra, rb: rb, a: r, err_abs: errA, err_rel: errR };
+    updateNinvOpamp();
 }
 
 function update()
 {
-    $('#voltdiv_r').html('<div style="font-family: mono;">' + JSON.stringify(calc($('#voltdiv_v1').val() / $('#voltdiv_v2').val(), 'e24'), null, 2).replaceAll('\n', '<br/>') + '</div>');
+    updateVoltDiv();
+    updateNinvOpamp();
 }
 
 $(function()
 {
-    $('#voltdiv_v1').bind('keyup mouseup', update);
-    $('#voltdiv_v2').bind('keyup mouseup', update);
+    $('#eSeries').html('');
+    for(let i = 0; i < ee_eSeries.length; ++i) $('#eSeries').append('<option value="' + ee_eSeries[i] + '">' + ee_eSeries[i] + '</option>');
+    $('#eSeries').val(ee_eSeries[3]);
+    $('#eSeries').bind('onchange', update);
+
+    $('#voltdiv_v1').bind('keyup mouseup', updateVoltDiv);
+    $('#voltdiv_v2').bind('keyup mouseup', updateVoltDiv);
+
+    $('#ninvopamp_vin').bind('keyup mouseup', () => { updateNinvOpamp_input(true, false); });
+    $('#ninvopamp_vout').bind('keyup mouseup', () => { updateNinvOpamp_input(false, true); });
+    $('#ninvopamp_a').bind('keyup mouseup', () => { updateNinvOpamp_input(false, false); });
+    updateNinvOpamp_input(true, false);
 
     update();
 });
