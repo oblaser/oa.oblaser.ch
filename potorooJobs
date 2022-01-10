@@ -10,6 +10,7 @@
 
 -if ./src/index.js                      -od ./deploy
 
+-if ./src/00_assets/calculators.css     -od ./deploy/00_assets          -t custom:/*#p      -Wsup 107
 -if ./src/00_assets/ee.js               -od ./deploy/00_assets
 -if ./src/00_assets/ojs.js              -od ./deploy/00_assets
 -if ./src/00_assets/style.css           -od ./deploy/00_assets          -t custom:/*#p      -Wsup 107

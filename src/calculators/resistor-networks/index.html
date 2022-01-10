@@ -16,6 +16,7 @@ copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
     <!-- <link rel="icon" href="./favicon.ico"> -->
 
     <link type="text/css" rel="stylesheet" href="/00_assets/style.css">
+    <link type="text/css" rel="stylesheet" href="/00_assets/calculators.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     
@@ -56,9 +57,9 @@ copyright       GNU GPLv3 - Copyright (c) 2022 Oliver Blaser
             
             <h2>Non-Inverting OP AMP</h2>
             <div>
-                <div style="display: inline-block; width: 50px;">V<sub>in</sub></div><input id="ninvopamp_vin" type="number" value="0.5"/><br/>
-                <div style="display: inline-block; width: 50px;">V<sub>out</sub></div><input id="ninvopamp_vout" type="number" value="2"/><br/>
-                <div style="display: inline-block; width: 50px;">A</div><input id="ninvopamp_a" type="number"/>
+                <div style="display: inline-block; width: 50px;">V<sub>in</sub></div><input id="ninvopamp_vin" class="valueInput" type="number" value="0.5"/><input id="ninvopamp_calcV" class="calcButton" type="button" value="calc"/><br/>
+                <div style="display: inline-block; width: 50px;">V<sub>out</sub></div><input id="ninvopamp_vout" class="valueInput" type="number" value="2"/><br/>
+                <div style="display: inline-block; width: 50px;">A</div><input id="ninvopamp_a" class="valueInput" type="number"/><input id="ninvopamp_calcA" class="calcButton" type="button" value="calc"/>
                 <div id="ninvopamp_r" style="margin: 7px 0px;"></div>
             </div>
 
